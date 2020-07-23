@@ -99,8 +99,22 @@ export function usePhotoGallery() {
       )
     );
   };
+  const deletePhoto = async (photo: Photo) => {
+
+    const newPhotos = photos.filter(p => p.filepath !== photo.filepath);
+
+    set(PHOTO_STORAGE, JSON.stringify(newPhotos));
+
+    const filename = photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1);
+    await deleteFile({
+      path: filename,
+      directory: FilesystemDirectory.Data
+    });
+    setPhotos(newPhotos);
+  };
   return {
     photos,
     takePhoto,
+    deletePhoto
   };
 }
