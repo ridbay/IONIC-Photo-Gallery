@@ -19,8 +19,8 @@ const Tab2: React.FC = () => {
           <IonGrid>
             <IonRow>
               {photos.map((photo, index) => {
-                  return <IonCol size="6" key={index}>
-                    <IonImg src={photo.webviewPath} />
+                  return <IonCol size="3" key={index}>
+                    <IonImg src={photo.base64 ?? photo.webviewPath} />
                   </IonCol>
                 })}
             </IonRow>
